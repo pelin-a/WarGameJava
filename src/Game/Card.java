@@ -59,9 +59,4 @@ public class Card {
 		System.out.println(str);
 	}
 	
-	
-	
-	
-	
-
 }
