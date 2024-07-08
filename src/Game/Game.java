@@ -1,12 +1,19 @@
 public class Game {
-    private Label player1Label, player2Label, winnerLabel;
-    private Button dealButton, quitButton;
-    private Panel player1Panel, player2Panel;
-    private ArrayList<Card> player1Deck = new ArrayList<>(), player2Deck = new ArrayList<>(), warDeck = new ArrayList<>();
+
+       public class Game {
+    private Label player1Label,  player2Label,  winnerLabel;
+    private Button dealButton,  quitButton;
+    private Panel player1Panel,  player2Panel;
+    private ArrayList<Card> player1Deck = new ArrayList<>(),  player2Deck = new ArrayList<>(),  warDeck = new ArrayList<>();
+    private Deck deck; // New instance of the Deck class
 
     public Game() {
         setTitle("War Card Game");
-       
+        
+        // Initialize the deck
+        deck = new Deck();
+        deck.initialize();
+        deck.shuffle();
 
         player1Label = new Label("Player 1");
         player2Label = new Label("Player 2");
@@ -20,12 +27,12 @@ public class Game {
         topPanel.add(winnerLabel);
 
         Panel centerPanel = new Panel();
-        centerPanel.setLayout(new GridLayout(1, 2));
+        centerPanel.setLayout(new GridLayout(1,  2));
 
         player1Panel = new Panel();
-        player1Panel.setLayout(new BoxLayout(player1Panel, BoxLayout.Y_AXIS));
+        player1Panel.setLayout(new BoxLayout(player1Panel,  BoxLayout.Y_AXIS));
         player2Panel = new Panel();
-        player2Panel.setLayout(new BoxLayout(player2Panel, BoxLayout.Y_AXIS));
+        player2Panel.setLayout(new BoxLayout(player2Panel,  BoxLayout.Y_AXIS));
 
         centerPanel.add(player1Panel);
         centerPanel.add(player2Panel);
@@ -34,25 +41,16 @@ public class Game {
         bottomPanel.add(dealButton);
         bottomPanel.add(quitButton);
 
-        add(topPanel, BorderLayout.NORTH);
-        add(centerPanel, BorderLayout.CENTER);
-        add(bottomPanel, BorderLayout.SOUTH);
+        add(topPanel,  BorderLayout.NORTH);
+        add(centerPanel,  BorderLayout.CENTER);
+        add(bottomPanel,  BorderLayout.SOUTH);
 
         dealButton.addActionListener(e -> dealCards());
         quitButton.addActionListener(e -> System.exit(0));
 
         setVisible(true);
     }
-
-    public void newGame() {
-        player1Deck.clear();
-        player2Deck.clear();
-        warDeck.clear();
-        player1Panel.removeAll();
-        player2Panel.removeAll();
-        winnerLabel.setText("");
-        dealCards();
-    }
+ }
 
     public void playRound() {
         if (!player1Deck.isEmpty() && !player2Deck.isEmpty()) {
