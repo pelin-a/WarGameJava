@@ -1,5 +1,6 @@
 package Game;
 import java.util.Collections;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Deck {
 		this.deck.addAll(deck);
 	}
 	//Creates a deck with all the necessary deck in them
-	public void initialize() {
+	public void initializeFull() {
 		String[] suits= {"Clubs","Diamonds","Hearts","Spades"};
 		String[] values ={"2","3","4","5","6","7","8","9","10","Jack","Queen","King","Ace"};
 		
@@ -37,10 +38,30 @@ public class Deck {
 	public List<Card> getDeck(){
 		return this.deck;
 	}	
+	public boolean isEmpty() {
+        return deck.isEmpty();
+    }
+	public Card drawCard() {
+        if (!deck.isEmpty()) {
+            return deck.remove(0);
+        }
+        return null;
+    }
+	public int size() {
+        return deck.size();
+    }
 	//shuffles the deck using shuffle method from Collections class.
 	public void shuffle() {
-        Collections.shuffle(deck);
-    }
+		if(!deck.isEmpty()) {
+			Random rand = new Random(); // new random object
+	    int n = deck.size();
+	    for (int i = 0; i < n; i++) { // starts placing cards randomly starting from the first card
+	        int j = rand.nextInt(n); // j is a random number between 0 and the size of the deck
+	        Card temp = deck.get(i); // gets the cards starting from index 0 stores in temp
+	        deck.set(i, deck.get(j));// gets a random card from a random index and puts it at index i
+	        deck.set(j, temp); //places temp card at index j(randomly)
+	    }}
+	}
 	//prints deck info card by card.
 	public void printDeck() {
 		String str="";
